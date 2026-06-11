@@ -13,7 +13,7 @@ a:hover {
 }
 
 a:active {
-  color: inherit;
+  color: #CBC3E3;
 }
 
 li::marker {
