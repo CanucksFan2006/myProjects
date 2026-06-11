@@ -2,3 +2,6 @@ body {
   background-color: #6495ED;
   font-family: sans-serif;
 }
+a {
+  text-decoration: none;
+}
