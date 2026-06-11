@@ -31,3 +31,7 @@ label {
   gap: 15px 10px;
   align-items: center;
 }
+
+.form-group {
+  display: contents; 
+}
