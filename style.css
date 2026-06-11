@@ -2,6 +2,15 @@ body {
   background-color: #6495ED;
   font-family: sans-serif;
 }
+
 a {
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  transform: scale(0.95);
 }
