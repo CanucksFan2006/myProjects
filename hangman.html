@@ -55,6 +55,11 @@
               else if (word.toLowerCase()[i] == value.toLowerCase())
               {
                 wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
+                foundLetters.push(value.toLowerCase())
+              }
+              else if (foundLetters.includes(word.toLowerCase()[i]))
+              {
+                wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
               }
             }
           }
