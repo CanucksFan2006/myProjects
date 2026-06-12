@@ -21,7 +21,7 @@
         button.style.display = "none";
         input.style.display = "";
         guessesRemaining = 5;
-        remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
+        remainingGuesses.innerHTML = "<b>Incorrect Guesses Remaining: " + guessesRemaining + "</b>";
         remainingGuesses.style.display = "";
         totalGuesses = 0;
         let myList = [
@@ -252,7 +252,7 @@
             else
             {
               guessesRemaining -= 1;
-              remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
+              remainingGuesses.innerHTML = "<b>Incorrect Guesses Remaining: " + guessesRemaining + "</b>";
               if (guessesRemaining == 0)
               {
                 window.alert("You Lost! The Word was " + word + "!");
