@@ -17,10 +17,21 @@
           numVal = number.value.trim();
           if (!isNaN(numVal) && numVal%1 == 0 && numVal > 0)
           {
-            for (let i = 0; i < numVal; i++)
+            outputDiv.innerHTML = "";
+            outputDiv.innerHTML += "<h1>" + numVal + "</h1>";
+            while (numVal != 1)
             {
-              outputDiv.innerHTML += "<h1>" + i + "</h1>";
-            }
+              if (numVal%2 == 0)
+              {
+                numVal /= 2;
+                outputDiv.innerHTML += "<h1>" + numVal + "</h1>";
+              }
+              else
+              {
+                numVal = numVal * 3 + 1;
+                outputDiv.innerHTML += "<h1>" + numVal + "</h1>";
+              }
+            } 
           }
         }
       }
