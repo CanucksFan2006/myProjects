@@ -31,6 +31,7 @@
           numVal = number.value.trim();
           if (!isNaN(numVal) && numVal%1 == 0 && numVal > 0)
           {
+            let iterations = 0;
             outputDiv.innerHTML = "";
             outputDiv.innerHTML += "<h1>" + numVal + "</h1>";
             while (numVal != 1)
@@ -45,7 +46,8 @@
                 numVal = numVal * 3 + 1;
                 outputDiv.innerHTML += "<h1>" + numVal + "</h1>";
               }
-            } 
+            }
+            outputDiv.innerHTML += "<h1>It took " + iterations + " to get to 1!</h1>";
           }
         }
       }
