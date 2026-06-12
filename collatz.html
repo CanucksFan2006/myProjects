@@ -8,7 +8,7 @@
     <h1>Enter a Number to see how Long it Takes to Reach 1!</h1>
     <label for="number">Enter a Number: </label>
     <input type="text" name="number" id="number">
-    <div id="location"></div>
+    <div id="locationDiv"></div>
     <script>
       function test(key)
       {
@@ -16,12 +16,12 @@
         { 
           for (let i = 0; i < 100; i++)
           {
-            location.innerHTML += "<h1>" + i + "</h1>";
+            locationDiv.innerHTML += "<h1>" + i + "</h1>";
           }
         }
       }
       let number = document.getElementById("number");
-      location = document.getElementById("location");
+      locationDiv = document.getElementById("locationDiv");
       number.addEventListener('keydown', test);
     </script>
   </body>
