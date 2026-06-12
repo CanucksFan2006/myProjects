@@ -10,16 +10,25 @@
         <div class="form-container">
             <label for="colorPicker">Choose a Color: </label>
             <input type="color" id="colorPicker">
-            <label for="clearButton">Choose a Color: </label>
+            <label for="clearButton">Clear the Canvas: </label>
             <button id="clearButton">Clear the Canvas</button>
         </div>
         <div id="canvas"></div>
         <script>
             let canvas = document.getElementById("canvas");
             let color = document.getElementById("colorPicker")
+            let clearButton = document.getElementById("clearButton")
+            clearButton.addEventListener("click", clearCanvas)
             function test()
             {
                 console.log("B");
+            }
+            function clearCanvas()
+            {
+                let pixels = document.querySelectorAll(".pixel")
+                pixels.forEach(p => {
+                    p.style.backgroundColor = "#ffffff";
+                });
             }
             for (let i = 0; i < 1024; i++)
             {
