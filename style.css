@@ -42,3 +42,11 @@ label {
   width: fit-content;
   margin: 20px auto;
 }
+
+.pixel
+{
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  cursor: crosshair;
+}
