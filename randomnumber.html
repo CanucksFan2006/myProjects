@@ -16,16 +16,28 @@
       function guess(minVal, maxVal)
       {
         let randomNumber = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
-        let userGuess = Number(window.prompt("Guess a Number").trim());
+        let userGuess = window.prompt("Guess a Number!");
+        if (userGuess == null)
+        {
+          break;
+        }
         while (Number(userGuess.trim() != randomNumber))
         {
           if (userGuess < randomNumber)
           {
             userGuess = Number(window.prompt("Higher!").trim());
+            if (userGuess == null)
+            {
+              break;
+            }
           }
           else if (userGuess > randomNumber)
           {
             userGuess = Number(window.prompt("Lower!").trim());
+            if (userGuess == null)
+            {
+              break;
+            }
           } 
         }
       }
