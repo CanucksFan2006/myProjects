@@ -248,16 +248,23 @@
           }
           else
           {
-            guessesRemaining -= 1;
-            remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
-            if (guessesRemaining == 0)
+            if (!guessedLetters.includes(value.toLowerCase()))
             {
-              window.alert("You Lost! The Word was " + word + "!");
-              button.style.display = "";
-              input.style.display = "none";
-              remainingGuesses.style.display = "none";
-              wordLocation.style.display = "none";
-              return;
+              guessesRemaining -= 1;
+              remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
+              if (guessesRemaining == 0)
+              {
+                window.alert("You Lost! The Word was " + word + "!");
+                button.style.display = "";
+                input.style.display = "none";
+                remainingGuesses.style.display = "none";
+                wordLocation.style.display = "none";
+                return;
+              }
+            }
+            else
+            {
+              window.alert("You Already Guessed That Letter!");
             }
           }
           totalGuesses += 1;
