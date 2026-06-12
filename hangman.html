@@ -79,7 +79,13 @@
             if (guessesRemaining == 0)
             {
               window.alert("You Lost! The Word was " + word + "!");
+              button.style.display = "";
+              input.style.display = "none";
               return;
+            }
+            else
+            {
+              window.alert("The Word Does Not Have the Letter " + value + "! Guess Again!")
             }
           }
           totalGuesses += 1;
