@@ -17,11 +17,16 @@
       {
         if (key.key === "Enter")
         {
-          window.alert("A");
+          let minVal = Number(minInput.value.trim());
+          let maxVal = Number(maxInput.value.trim());
+          if (!isNaN(minVal) && !isNaN(maxVal) && minVal%1 == 0 && maxVal%1 == 0 && minVal <= maxVal)
+          {
+            window.alert("A");
+          }
         }
       }
-      minInput = document.getElementById("min");
-      maxInput = document.getElementById("max");
+      let minInput = document.getElementById("min");
+      let maxInput = document.getElementById("max");
       minInput.addEventListener('keydown', test);
       maxInput.addEventListener('keydown', test);
     </script>
