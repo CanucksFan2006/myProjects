@@ -19,7 +19,7 @@
         let userGuess = window.prompt("Guess a Number!");
         if (userGuess == null)
         {
-          break;
+          return;
         }
         while (Number(userGuess.trim() != randomNumber))
         {
@@ -28,7 +28,7 @@
             userGuess = Number(window.prompt("Higher!").trim());
             if (userGuess == null)
             {
-              break;
+              return;
             }
           }
           else if (userGuess > randomNumber)
@@ -36,7 +36,7 @@
             userGuess = Number(window.prompt("Lower!").trim());
             if (userGuess == null)
             {
-              break;
+              return;
             }
           } 
         }
