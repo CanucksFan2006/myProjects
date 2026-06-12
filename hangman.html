@@ -17,7 +17,9 @@
         foundLetters.length = 0;
         button.style.display = "none";
         input.style.display = "";
-        let myList = ["This One Here", "Lets Go", "We Are Among Us", "We are Charlie Kirk we fight For the Flame"];
+        guessesRemaining = 5;
+        totalGuesses = 0;
+        let myList = ["a", "b", "c"];
         word = myList[Math.floor(Math.random() * myList.length)];
         console.log(word);
         wordLocation = document.getElementById("word")
@@ -38,6 +40,13 @@
       {
         if (k.key == "Enter")
         {
+          if (value.toLowerCase() == word.toLowerCase())
+          {
+            window.alert("You Guessed the Word With " + totalGuesses + " Guessed Letters!");
+            button.style.display = "";
+            input.style.display = "none";
+            return;
+          }
           let value = input.value[0];
           if (word.toLowerCase().includes(value.toLowerCase()))
           {
@@ -63,6 +72,11 @@
               }
             }
           }
+          else
+          {
+            guessesRemaining -= 1;
+          }
+          totalGuesses += 1;
         }
       }
       let button = document.getElementById("startButton")
