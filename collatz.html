@@ -5,6 +5,24 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>A</h1>
+    <h1>Enter a Number to see how Long it Takes to Reach 1!</h1>
+    <label for="number">Enter a Number: </label>
+    <input type="text" name="number" id="number">
+    <div id="outputDiv"></div>
+    <script>
+      function test(key)
+      {
+        if (key.key == "Enter")
+        { 
+          for (let i = 0; i < 100; i++)
+          {
+            outputDiv.innerHTML += "<h1>" + i + "</h1>";
+          }
+        }
+      }
+      let number = document.getElementById("number");
+      let outputDiv = document.getElementById("outputDiv");
+      number.addEventListener('keydown', test);
+    </script>
   </body>
 </html>
