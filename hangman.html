@@ -6,23 +6,29 @@
   </head>
   <body>
     <h1>Hangman</h1>
+    <button id="startButton">Start Game</button>
     <div id="word"></div>
     <script>
-      let myList = ["This One Here", "Lets Go", "We Are Among Us"];
-      let word = myList[Math.floor(Math.random() * myList.length)];
-      console.log(word);
-      let wordLocation = document.getElementById("word")
-      for (let i = 0; i < word.length; i++)
+      function start()
       {
-        if (word[i] != " ")
+        let myList = ["This One Here", "Lets Go", "We Are Among Us"];
+        let word = myList[Math.floor(Math.random() * myList.length)];
+        console.log(word);
+        let wordLocation = document.getElementById("word")
+        for (let i = 0; i < word.length; i++)
         {
-          wordLocation.innerHTML += "_&nbsp;";
-        }
-        else 
-        {
-          wordLocation.innerHTML += "&nbsp;&nbsp;";
+          if (word[i] != " ")
+          {
+            wordLocation.innerHTML += "_&nbsp;";
+          }
+          else 
+          {
+            wordLocation.innerHTML += "&nbsp;&nbsp;";
+          }
         }
       }
+      let button = document.getElementById("startButton")
+      button.addEventListener("click", start);
     </script>
   </body>
 </html>
