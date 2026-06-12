@@ -222,46 +222,53 @@
             return;
           }
           value = value[0];
-          if (word.toLowerCase().includes(value.toLowerCase()))
+          if (!guessedLetters.includes(value.toLowerCase()))
           {
-            wordLocation.innerHTML = "";
-            for (let i = 0; i < word.length; i++)
+            if (word.toLowerCase().includes(value.toLowerCase()))
             {
-              if (word[i] != " " && word.toLowerCase()[i] != value.toLowerCase() && !foundLetters.includes(word.toLowerCase()[i]))
+              wordLocation.innerHTML = "";
+              for (let i = 0; i < word.length; i++)
               {
-                wordLocation.innerHTML += "_&nbsp;";
-              }
-              else if (word[i] == " ")
-              {
-                wordLocation.innerHTML += "&nbsp;&nbsp;";
-              }
-              else if (word.toLowerCase()[i] == value.toLowerCase())
-              {
-                wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
-                foundLetters.push(value.toLowerCase())
-              }
-              else if (foundLetters.includes(word.toLowerCase()[i]))
-              {
-                wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
+                if (word[i] != " " && word.toLowerCase()[i] != value.toLowerCase() && !foundLetters.includes(word.toLowerCase()[i]))
+                {
+                  wordLocation.innerHTML += "_&nbsp;";
+                }
+                else if (word[i] == " ")
+                {
+                  wordLocation.innerHTML += "&nbsp;&nbsp;";
+                }
+                else if (word.toLowerCase()[i] == value.toLowerCase())
+                {
+                  wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
+                  foundLetters.push(value.toLowerCase())
+                }
+                else if (foundLetters.includes(word.toLowerCase()[i]))
+                {
+                  wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
+                }
               }
             }
+            else
+            {
+              guessesRemaining -= 1;
+              remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
+              if (guessesRemaining == 0)
+              {
+                window.alert("You Lost! The Word was " + word + "!");
+                button.style.display = "";
+                input.style.display = "none";
+                remainingGuesses.style.display = "none";
+                wordLocation.style.display = "none";
+                return;
+              }
+            }
+            totalGuesses += 1;
+            guessedLetters.push(value.toLowerCase())
           }
           else
           {
-            guessesRemaining -= 1;
-            remainingGuesses.innerHTML = "<b>Guesses Remaining: " + guessesRemaining + "</b>";
-            if (guessesRemaining == 0)
-            {
-              window.alert("You Lost! The Word was " + word + "!");
-              button.style.display = "";
-              input.style.display = "none";
-              remainingGuesses.style.display = "none";
-              wordLocation.style.display = "none";
-              return;
-            }
+            window.alert("You Already Guessed That Letter!")
           }
-          totalGuesses += 1;
-          guessedLetters.push(value.toLowerCase())
         }
       }
       let wordLocation = document.getElementById("word")
