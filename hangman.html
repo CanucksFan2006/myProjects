@@ -76,6 +76,11 @@
           else
           {
             guessesRemaining -= 1;
+            if (guessesRemaining == 0)
+            {
+              window.alert("You Lost! The Word was " + word + "!");
+              return;
+            }
           }
           totalGuesses += 1;
         }
