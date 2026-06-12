@@ -16,6 +16,7 @@
         <div id="canvas"></div>
         <script>
             let canvas = document.getElementById("canvas");
+            let color = document.getElementById("colorPicker")
             function test()
             {
                 console.log("B");
@@ -26,7 +27,7 @@
                 p.classList.add("pixel");
                 p.addEventListener("click", () => 
                 {
-                    p.style.backgroundColor = "#ff0000"
+                    p.style.backgroundColor = color.value;
                 });
                 canvas.appendChild(p);
                 console.log("A");

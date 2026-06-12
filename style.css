@@ -32,7 +32,7 @@ label {
   align-items: center;
 }
 
-#gridContainer 
+#canvas 
 {
   display: grid;
   grid-template-columns: repeat(32, 15px);
