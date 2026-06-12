@@ -40,6 +40,7 @@
       {
         if (k.key == "Enter")
         {
+          let value = input.value;
           if (value.toLowerCase() == word.toLowerCase())
           {
             window.alert("You Guessed the Word With " + totalGuesses + " Guessed Letters!");
@@ -47,7 +48,7 @@
             input.style.display = "none";
             return;
           }
-          let value = input.value[0];
+          value = value[0];
           if (word.toLowerCase().includes(value.toLowerCase()))
           {
             wordLocation.innerHTML = "";
