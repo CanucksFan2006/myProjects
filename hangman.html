@@ -8,14 +8,21 @@
     <h1>Hangman</h1>
     <div id="word"></div>
     <script>
-      let myList = ["A", "B", "C"];
+      let myList = ["This One Here", "Lets Go", "We Are Among Us"];
       let word = myList[Math.floor(Math.random() * myList.length)];
       console.log(word);
       let wordLocation = document.getElementById("word")
       for (let i = 0; i < word.length; i++)
-    {
-      wordLocation.innerText += "_";
-    }
+      {
+        if (word[i] != " ")
+        {
+          wordLocation.innerText += "_";
+        }
+        else 
+        {
+          wordLocation.innerText += " ";
+        }
+      }
     </script>
   </body>
 </html>
