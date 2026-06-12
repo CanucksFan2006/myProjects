@@ -16,11 +16,12 @@
         { 
           for (let i = 0; i < 100; i++)
           {
-            console.log(i);
+            location.innerHTML += "<h1>" + i + "</h1>";
           }
         }
       }
       let number = document.getElementById("number");
+      location = document.getElementById("location");
       number.addEventListener('keydown', test);
     </script>
   </body>
