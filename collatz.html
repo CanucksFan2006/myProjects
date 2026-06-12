@@ -13,10 +13,14 @@
       function test(key)
       {
         if (key.key == "Enter")
-        { 
-          for (let i = 0; i < 100; i++)
+        {
+          numVal = number.value.trim();
+          if (!isNaN(numVal) && numVal%1 == 0 && numVal > 0)
           {
-            outputDiv.innerHTML += "<h1>" + i + "</h1>";
+            for (let i = 0; i < numVal; i++)
+            {
+              outputDiv.innerHTML += "<h1>" + i + "</h1>";
+            }
           }
         }
       }
