@@ -193,7 +193,7 @@
         ];
         word = myList[Math.floor(Math.random() * myList.length)];
         console.log(word);
-        wordLocation = document.getElementById("word")
+        wordLocation.style.display = "";
         wordLocation.innerHTML = "";
         for (let i = 0; i < word.length; i++)
         {
@@ -217,7 +217,7 @@
             window.alert("You Guessed the Word With " + totalGuesses + " Guessed Letters!");
             button.style.display = "";
             input.style.display = "none";
-            wordLocation.innerHTML = "none";
+            wordLocation.style.display = "none";
             remainingGuesses.style.display = "none";
             return;
           }
@@ -261,14 +261,17 @@
             }
           }
           totalGuesses += 1;
+          guessedLetters.push(value.toLowerCase())
         }
       }
+      let wordLocation = document.getElementById("word")
       let button = document.getElementById("startButton")
       button.addEventListener("click", start);
       let input = document.getElementById("inputBox");
       input.addEventListener("keydown", guessLetter);
       input.style.display = "none";
       let foundLetters = [];
+      let guessedLetters = [];
       let remainingGuesses = document.getElementById("remainingGuesses")
       remainingGuesses.style.display = "none";
     </script>
