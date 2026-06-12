@@ -33,6 +33,10 @@
       function guessLetter(k)
       {
         let value = input.value[0];
+        if (value in word)
+        {
+          window.alert("A");
+        }
       }
       let button = document.getElementById("startButton")
       button.addEventListener("click", start);
