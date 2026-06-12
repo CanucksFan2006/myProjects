@@ -225,6 +225,8 @@
           value = value[0];
           if (!guessedLetters.includes(value.toLowerCase()))
           {
+            totalGuesses += 1;
+            guessedLetters.push(value.toLowerCase())
             if (word.toLowerCase().includes(value.toLowerCase()))
             {
               wordLocation.innerHTML = "";
@@ -248,6 +250,15 @@
                   wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
                 }
               }
+              if (!wordLocation.innerHTML.includes("_"))
+              {
+                window.alert("You Figured Out the Word With " + totalGuesses + " Guesses!");
+                button.style.display = "";
+                input.style.display = "none";
+                wordLocation.style.display = "none";
+                remainingGuesses.style.display = "none";
+                return;
+              }
             }
             else
             {
@@ -263,8 +274,6 @@
                 return;
               }
             }
-            totalGuesses += 1;
-            guessedLetters.push(value.toLowerCase())
           }
           else
           {
