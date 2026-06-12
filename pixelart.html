@@ -15,10 +15,18 @@
         </div>
         <div id="canvas"></div>
         <script>
+            let canvas = document.getElementById("canvas");
+            function test()
+            {
+                console.log("B");
+            }
             for (let i = 0; i < 1024; i++)
             {
-                let p = document.createElement("div")
-                p.classList.add("pixel")
+                let p = document.createElement("div");
+                p.classList.add("pixel");
+                p.addEventListener("click", test);
+                canvas.appendChild(p);
+                console.log("A");
             }
         </script>
     </body>
