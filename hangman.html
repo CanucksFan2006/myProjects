@@ -32,10 +32,23 @@
       }
       function guessLetter(k)
       {
-        let value = input.value[0];
-        if (word.includes(value))
+        if (k.key == "Enter")
         {
-          window.alert("A");
+          let value = input.value[0];
+          if (word.includes(value))
+          {
+            for (let i = 0; i < word.length; i++)
+            {
+              if (word[i] != " ")
+              {
+                wordLocation.innerHTML += "_&nbsp;";
+              }
+              else 
+              {
+                wordLocation.innerHTML += "&nbsp;&nbsp;";
+              }
+            }
+          }
         }
       }
       let button = document.getElementById("startButton")
