@@ -8,6 +8,8 @@
     <h1>Hangman</h1>
     <button id="startButton">Start Game</button>
     <input type="text" placeholder="Enter a Letter" id="inputBox">
+    <br>
+    <br>
     <div id="word"></div>
     <script>
       function start()
@@ -17,7 +19,8 @@
         let myList = ["This One Here", "Lets Go", "We Are Among Us"];
         word = myList[Math.floor(Math.random() * myList.length)];
         console.log(word);
-        let wordLocation = document.getElementById("word")
+        wordLocation = document.getElementById("word")
+        wordLocation.innerHTML = "";
         for (let i = 0; i < word.length; i++)
         {
           if (word[i] != " ")
@@ -35,17 +38,22 @@
         if (k.key == "Enter")
         {
           let value = input.value[0];
-          if (word.includes(value))
+          if (word.toLowerCase().includes(value.toLowerCase()))
           {
+            wordLocation.innerHTML = "";
             for (let i = 0; i < word.length; i++)
             {
-              if (word[i] != " ")
+              if (word[i] != " " && word.toLowerCase()[i] != value.toLowerCase())
               {
                 wordLocation.innerHTML += "_&nbsp;";
               }
-              else 
+              else if (word[i] == " ")
               {
                 wordLocation.innerHTML += "&nbsp;&nbsp;";
+              }
+              else if (word.toLowerCase()[i] == value.toLowerCase())
+              {
+                wordLocation.innerHTML += "<b>" + word[i] + "</b>" + "&nbsp;";
               }
             }
           }
@@ -56,6 +64,7 @@
       let input = document.getElementById("inputBox");
       input.addEventListener("keydown", guessLetter);
       input.style.display = "none";
+      let foundLetters = [];
     </script>
   </body>
 </html>
