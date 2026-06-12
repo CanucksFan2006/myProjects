@@ -15,7 +15,7 @@
         button.style.display = "none";
         input.style.display = "";
         let myList = ["This One Here", "Lets Go", "We Are Among Us"];
-        let word = myList[Math.floor(Math.random() * myList.length)];
+        word = myList[Math.floor(Math.random() * myList.length)];
         console.log(word);
         let wordLocation = document.getElementById("word")
         for (let i = 0; i < word.length; i++)
@@ -33,7 +33,7 @@
       function guessLetter(k)
       {
         let value = input.value[0];
-        if (value in word)
+        if (word.includes(value))
         {
           window.alert("A");
         }
