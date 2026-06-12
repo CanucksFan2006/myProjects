@@ -7,7 +7,19 @@
     </head>
     <body>
         <h1>Make Your Own Pixel Art!</h1>
-        <label for="colorpicker">Choose a Color: </label>
-        <input type="color" id="colorpicker">
+        <div class="form-container">
+            <label for="colorPicker">Choose a Color: </label>
+            <input type="color" id="colorPicker">
+            <label for="clearButton">Choose a Color: </label>
+            <button id="clearButton">Clear the Canvas</button>
+        </div>
+        <div id="canvas"></div>
+        <script>
+            for (let i = 0; i < 1024; i++)
+            {
+                let p = document.createElement("div")
+                p.classList.add("pixel")
+            }
+        </script>
     </body>
 </html>
