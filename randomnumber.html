@@ -16,10 +16,15 @@
       function guess(minVal, maxVal)
       {
         let randomNumber = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+        let guesses = 0;
         let userGuess = window.prompt("Guess a Number!");
         if (userGuess == null)
         {
           return;
+        }
+        while (isNaN(Number(userGuess.trim())))
+        {
+          userGuess = window.prompt("Guess a Number!");
         }
         while (Number(userGuess.trim() != randomNumber))
         {
@@ -34,6 +39,7 @@
             {
               userGuess = window.prompt("Higher!");
             }
+            guesses += 1;
           }
           else if (userGuess > randomNumber)
           {
@@ -46,8 +52,11 @@
             {
               userGuess = window.prompt("Lower!");
             }
+            guesses += 1;
           }
         }
+        window.prompt("You guessed the number in ".." tries!");
+        return;
       }
       function test(key)
       {
