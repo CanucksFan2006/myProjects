@@ -9,12 +9,12 @@
     <div id="word"></div>
     <script>
       let myList = ["A", "B", "C"];
-      let word = Math.floor(Math.random() * myList.length);
+      let word = myList[Math.floor(Math.random() * myList.length)];
       console.log(word);
       let wordLocation = document.getElementById("word")
       for (let i = 0; i < word.length; i++)
     {
-      wordLocation.innerText += "_"
+      wordLocation.innerText += "_";
     }
     </script>
   </body>
