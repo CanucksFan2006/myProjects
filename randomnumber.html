@@ -25,20 +25,26 @@
         {
           if (userGuess < randomNumber)
           {
-            userGuess = window.prompt("Higher!");
-            if (userGuess == null)
+            while (isNaN(Number(userGuess.trim())))
             {
-              return;
+              userGuess = window.prompt("Higher!");
+              if (userGuess == null)
+              {
+                return;
+              }
             }
           }
           else if (userGuess > randomNumber)
           {
-            userGuess = window.prompt("Lower!");
-            if (userGuess == null)
+            while (isNaN(Number(userGuess.trim())))
             {
-              return;
+              userGuess = window.prompt("Lower!");
+              if (userGuess == null)
+              {
+                return;
+              }
             }
-          } 
+          }
         }
       }
       function test(key)
