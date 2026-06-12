@@ -24,7 +24,10 @@
             {
                 let p = document.createElement("div");
                 p.classList.add("pixel");
-                p.addEventListener("click", test);
+                p.addEventListener("click", () => 
+                {
+                    p.style.backgroundColor = "#ff0000"
+                });
                 canvas.appendChild(p);
                 console.log("A");
             }
