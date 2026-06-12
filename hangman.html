@@ -7,10 +7,12 @@
   <body>
     <h1>Hangman</h1>
     <button id="startButton">Start Game</button>
+    <input id="input" type="text" name="input">
     <div id="word"></div>
     <script>
       function start()
       {
+        button.style.display = "none"
         let myList = ["This One Here", "Lets Go", "We Are Among Us"];
         let word = myList[Math.floor(Math.random() * myList.length)];
         console.log(word);
