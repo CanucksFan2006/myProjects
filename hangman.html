@@ -19,7 +19,7 @@
         button.style.display = "none";
         input.style.display = "";
         guessesRemaining = 5;
-        remainingGuesses.innerHTML = "<h1>Guesses Remaining: " + guessesRemaining + "</h1>";
+        remainingGuesses.innerHTML = "<h5>Guesses Remaining: " + guessesRemaining + "</h5>";
         remainingGuesses.style.display = "";
         totalGuesses = 0;
         let myList = [
@@ -216,7 +216,7 @@
             window.alert("You Guessed the Word With " + totalGuesses + " Guessed Letters!");
             button.style.display = "";
             input.style.display = "none";
-            wordLocation.innerHTML = "";
+            wordLocation.innerHTML = "none";
             remainingGuesses.style.display = "none";
             return;
           }
@@ -248,19 +248,15 @@
           else
           {
             guessesRemaining -= 1;
-            remainingGuesses.innerHTML = "<h1>Guesses Remaining: " + guessesRemaining + "</h1>";
+            remainingGuesses.innerHTML = "<h5>Guesses Remaining: " + guessesRemaining + "</h5>";
             if (guessesRemaining == 0)
             {
               window.alert("You Lost! The Word was " + word + "!");
               button.style.display = "";
               input.style.display = "none";
               remainingGuesses.style.display = "none";
-              wordLocation.innerHTML = "";
+              wordLocation.innerHTML = "none";
               return;
-            }
-            else
-            {
-              window.alert("The Word Does Not Have the Letter " + value + "! You Have " + guessesRemaining + " Guesses Remaining!")
             }
           }
           totalGuesses += 1;
