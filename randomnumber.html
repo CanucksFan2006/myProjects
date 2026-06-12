@@ -13,6 +13,14 @@
       <input type="text" name="max" id="max">
     </div>
     <script>
+      guess()
+      {
+        let randomNumber = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+        userGuess = window.prompt("Guess a Number");
+        while (Number(userGuess.trim() != randomNumber))
+        {
+          userGuess = window.prompt("Guess a Number");
+        }
       function test(key)
       {
         if (key.key === "Enter")
@@ -21,7 +29,11 @@
           let maxVal = Number(maxInput.value.trim());
           if (!isNaN(minVal) && !isNaN(maxVal) && minVal%1 == 0 && maxVal%1 == 0 && minVal <= maxVal)
           {
-            window.alert("A");
+            guess();
+          }
+          else
+          {
+            window.alert("Invalid Values");
           }
         }
       }
