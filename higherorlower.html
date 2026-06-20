@@ -9,15 +9,23 @@
         <h1>Higher Or Lower</h1>
         <button id="startButton">Start</button>
         <div id="number"></div>
+        <button id="higherButton">Higher</button>
+        <button id="lowerButton">Lower</button>
         <script>
             function t()
             {
+                button.style.display = "none";
                 let n = Math.floor(Math.random() * 100) + 1;
-                numberDiv.innerHTML = "<h1>" + n.toString() + "</h1>"
+                numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
             }
-            const button = document.getElementById("startButton")
-            const numberDiv = document.getElementById("number")
-            button.addEventListener("click", t)
+            let started = 0;
+            const button = document.getElementById("startButton");
+            const numberDiv = document.getElementById("number");
+            const higherButton = document.getElementById("higher")
+            const lowerButton = document.getElementById("lower")
+            higherButton.style.display = "none"
+            
+            button.addEventListener("click", t);
         </script>
     </body>
 </html>
