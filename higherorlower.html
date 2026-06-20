@@ -7,6 +7,17 @@
     </head>
     <body>
         <h1>Higher Or Lower</h1>
-        <button>Start</button>
+        <button id="startButton">Start</button>
+        <div id="number"></div>
+        <script>
+            function t()
+            {
+                let n = Math.floor(Math.random() * 100) + 1;
+                numberDiv.innerHTML = "<h1>" + n.toString() + "</h1>"
+            }
+            const button = document.getElementById("startButton")
+            const numberDiv = document.getElementById("number")
+            button.addEventListener("click", t)
+        </script>
     </body>
 </html>
