@@ -13,6 +13,7 @@
         <button id="lowerButton">Lower</button>
         <div id="streakText"></div>
         <div id="highScoreText"></div>
+        <h1><a href="index.html">Back</a></h1>
         <script>
             function start()
             {
@@ -40,7 +41,7 @@
                 }
                 else
                 {
-                    window.alert("Wrong")
+                    window.alert("Wrong! You were guess correctly " + streak.toString() + " times in a row!")
                     reset()
                 }
             }
@@ -60,7 +61,7 @@
                 }
                 else
                 {
-                    window.alert("Wrong")
+                    window.alert("Wrong! You were guess correctly " + streak.toString() + " times in a row!")
                     reset()
                 }
             }
