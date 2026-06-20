@@ -18,6 +18,7 @@
                 higherButton.style.display = "";
                 lowerButton.style.display = "";
                 streakDiv.style.display = "";
+                numberDiv.style.display = "";
                 button.style.display = "none";
                 n = Math.floor(Math.random() * 100) + 1;
                 numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
@@ -33,6 +34,8 @@
                 {
                     streak += 1;
                     streakDiv.innerHTML = "<h3>Streak: " + streak.toString() +"</h3>"
+                    n = newN
+                    numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
                 }
                 else
                 {
@@ -51,6 +54,8 @@
                 {
                     streak += 1;
                     streakDiv.innerHTML = "<h3>Streak: " + streak.toString() +"</h3>"
+                    n = newN
+                    numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
                 }
                 else
                 {
@@ -58,12 +63,22 @@
                     reset()
                 }
             }
+            function reset()
+            {
+                streak = 0;
+                higherButton.style.display = "none";
+                lowerButton.style.display = "none";
+                streakDiv.style.display = "none";
+                numberDiv.style.display = "none";
+                button.style.display = "";
+            }
             let streak = 0;
             const button = document.getElementById("startButton");
             const numberDiv = document.getElementById("number");
             const higherButton = document.getElementById("higherButton")
             const lowerButton = document.getElementById("lowerButton")
             const streakDiv = document.getElementById("streakText")
+            numberDiv.style.display = "none";
             higherButton.style.display = "none";
             lowerButton.style.display = "none";
             streakDiv.style.display = "none";
