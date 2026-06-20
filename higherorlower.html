@@ -12,6 +12,7 @@
         <button id="higherButton">Higher</button>
         <button id="lowerButton">Lower</button>
         <div id="streakText"></div>
+        <div id="highScoreText"></div>
         <script>
             function start()
             {
@@ -19,6 +20,7 @@
                 lowerButton.style.display = "";
                 streakDiv.style.display = "";
                 numberDiv.style.display = "";
+                highScoreDiv.style.display = "";
                 button.style.display = "none";
                 n = Math.floor(Math.random() * 100) + 1;
                 numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
@@ -73,16 +75,20 @@
                 button.style.display = "";
             }
             let streak = 0;
+            let highScore = localStorage.getItem("highScore") || 0;
             const button = document.getElementById("startButton");
             const numberDiv = document.getElementById("number");
             const higherButton = document.getElementById("higherButton")
             const lowerButton = document.getElementById("lowerButton")
             const streakDiv = document.getElementById("streakText")
+            const highScoreDiv = document.getElementById("highScoreText")
             numberDiv.style.display = "none";
             higherButton.style.display = "none";
             lowerButton.style.display = "none";
             streakDiv.style.display = "none";
+            highScoreDiv.style.display = "none";
             streakDiv.innerHTML = "<h3>Streak: " + streak.toString() +"</h3>"
+            highScoreDiv.innerHTML = "<h3>High Score: " + highScore.toString() +"</h3>"
             button.addEventListener("click", start);
             higherButton.addEventListener("click", higher);
             lowerButton.addEventListener("click", lower);
