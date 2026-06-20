@@ -12,20 +12,56 @@
         <button id="higherButton">Higher</button>
         <button id="lowerButton">Lower</button>
         <script>
-            function t()
+            function start()
             {
+                higherButton.style.display = "";
+                lowerButton.style.display = "";
                 button.style.display = "none";
-                let n = Math.floor(Math.random() * 100) + 1;
+                n = Math.floor(Math.random() * 100) + 1;
                 numberDiv.innerHTML = "<h2>Will the next number be higher or lower than " + n.toString() + "?</h2>";
             }
-            let started = 0;
+            function higher()
+            {
+                newN = 0
+                while (newN == n)
+                {
+                    newN = Math.floor(Math.random() * 100) + 1;
+                }
+                if (newN > n)
+                {
+                    streak += 1;
+                }
+                else
+                {
+                    window.alert("Wrong")
+                }
+            }
+            function lower()
+            {
+                newN = 0
+                while (newN == n)
+                {
+                    newN = Math.floor(Math.random() * 100) + 1;
+                }
+                if (newN < n)
+                {
+                    streak += 1;
+                }
+                else
+                {
+                    window.alert("Wrong")
+                }
+            }
+            let streak = 0;
             const button = document.getElementById("startButton");
             const numberDiv = document.getElementById("number");
-            const higherButton = document.getElementById("higher")
-            const lowerButton = document.getElementById("lower")
-            higherButton.style.display = "none"
-            
-            button.addEventListener("click", t);
+            const higherButton = document.getElementById("higherButton")
+            const lowerButton = document.getElementById("lowerButton")
+            higherButton.style.display = "none";
+            lowerButton.style.display = "none";
+            button.addEventListener("click", start);
+            higherButton.addEventListener("click", higher);
+            lowerButton.addEventListener("click", lower);
         </script>
     </body>
 </html>
