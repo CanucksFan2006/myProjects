@@ -65,7 +65,7 @@
                             }
                         }
                     }
-                    
+
                     if (potentialSwap === 1) {
                         if (value === arr[index - shift]) {
                             let target1 = document.getElementById(`song${i - 1}`);
@@ -82,9 +82,10 @@
                         potentialSwap = 0;
                         shift = 0;
                     }
-                    
-                    if (value === arr[index + shift + 1]) {
+                    console.log(shift)
+                    if (value === arr[index - shift + 1]) {
                         potentialSwap = 1;
+                        console.log("A")
                     }
                     index = index + 1;
                     i = i + 1
