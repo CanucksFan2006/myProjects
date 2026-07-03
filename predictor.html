@@ -38,19 +38,17 @@
             function press(event, value) {
                 if (event.key === "Enter") {
                     let arr = predictionDiv.innerText.split("\n")
-                    arr.forEach(song => {
-                        if (value === song) {
-                            if (shift === 0) {
-                                actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
-                            } else {
-                                actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
-                                shift = 0;
-                            }
+                    if (value === song) {
+                        if (shift === 0) {
+                            actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
                         } else {
-                            actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
-                            shift = 1;
+                            actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
+                            shift = 0;
                         }
-                    });
+                    } else {
+                        actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
+                        shift = 1;
+                    }
                 }
             }
 
