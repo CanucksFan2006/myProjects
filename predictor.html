@@ -54,11 +54,13 @@
                         index++;
                     } 
                     // 2. SWAP (Check if this is the next one, and next one is this one)
-                    else if (index + 1 < arr.length && value === arr[index+1] && nextInput === arr[index]) { 
-                        // Note: This requires looking one step ahead
-                        li.style.backgroundColor = "#00aaaa"; // Blue
+                    else if (lastPlayed !== null && value === preds[currentIndex] && lastPlayed === preds[currentIndex + 1]) {
+                        markBlue(value); 
+                        markBlue(lastPlayed);
+                        currentIndex += 2; // Move index past both
+                        lastPlayed = null;     // Clear lastPlayed
+                        return;
                     }
-                    // 3. REPETITION (If song was just played)
                     else if (value === lastPlayed) {
                         repetitions[value] = (repetitions[value] || 1) + 1;
                         li.textContent += ` (${repetitions[value]}x)`;
@@ -73,6 +75,7 @@
                     else {
                         li.style.backgroundColor = "#aa0000"; // Red
                     }
+                    lastPlayed = value;
 
                     actualDiv.appendChild(li);
                     lastPlayed = value;
@@ -101,6 +104,7 @@
             let tInner = "";
             let repetitions = 2;
             let lastSongWasWrong = false;
+            let lastPlayed = null;
             actualDiv.innerHTML = ""
         </script>
     </body>
