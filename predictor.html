@@ -39,6 +39,7 @@
             <div id="actualSongs"></div>
         </ol>
         <br>
+        <h2><div id="score"></div></h2>
         <input type="text" id="typed" onkeypress="press(event, this.value)">
         <h1><a href="index.html">Back</a></h1>
         <script>
@@ -100,7 +101,7 @@
             }
 
             function score(items) {
-
+                score.innerText = items.length
             }
             function uploaded(event) {
                 const file = event.target.files[0];
@@ -118,6 +119,7 @@
             }
             const predictionDiv = document.getElementById("predictedSongs");
             const actualDiv = document.getElementById("actualSongs");
+            const scoreDiv = document.getElementById("score");
             let shift = 0;
             let index = 0;
             let i = 0
