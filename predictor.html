@@ -40,16 +40,13 @@
                     let arr = predictionDiv.innerText.split("\n")
                     if (value === arr[index]) {
                         if (shift !== 1) {
-                            actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
+                            actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
                         } else {
-                            actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
+                            actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
                         }
                         shift = 0;
-                    } else if (value === arr[index + 1]) {
-                        actualDiv.innerHTML += `<li style="background-color:#00aaaa" id="song${index}">${value}</li>`;
-                    }
-                    else {
-                        actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
+                    } else {
+                        actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
                         shift = shift + 1;
                     }
                     index = index + 1;
