@@ -45,12 +45,13 @@
                             actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
                             index = index - shift
                             shift = 0;
+                            console.log(potentialSwap)
                         } else {
                             actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`
                             shift = shift + 1
                         }
                     }
-                    
+
                     if (potentialSwap === 1) {
                         if (value === arr[index - 1]) {
                             let target1 = document.getElementById(`song${index - 1}`);
