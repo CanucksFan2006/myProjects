@@ -42,7 +42,7 @@
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
                     } else {
                         actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
-                        potentialShift = potentialShift + 1;
+                        shift = 1;
                     }
                     if (potentialSwap === 1) {
                         if (value === arr[index - 1]) {
@@ -53,19 +53,15 @@
                             potentialSwap = 0;
                         }
                     }
-                    if (potentialShift === 1) {
+                    if (shift === 1) {
                         if (value === arr[index - 1]) {
-                            let target1 = document.getElementById(`song${index - 1}`);
-                            let target2 = document.getElementById(`song${index}`);
-                            target1.style.backgroundColor = "#00aaaa";
-                            target2.style.backgroundColor = "#00aaaa";
-                            potentialSwap = 0;
+                            actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
+                            index = index + 1
+                            shift = 0;
                         }
                     }
                     if (value === arr[index + 1]) {
                         potentialSwap = 1;
-                    }
-                    if (value === arr[index - 1]) {
                     }
                     index = index + 1;
                 }
