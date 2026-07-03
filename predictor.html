@@ -37,10 +37,13 @@
         <script>
             function press(event, value) {
                 if (event.key === "Enter") {
-                    actualDiv.innerHTML += `<li style="bg-color:red">${value}</li>`;
                     let arr = predictionDiv.innerText.split("\n")
                     arr.forEach(song => {
-                        
+                        if (value === song) {
+                            actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
+                        } else {
+                            actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
+                        }
                     });
                 }
             }
