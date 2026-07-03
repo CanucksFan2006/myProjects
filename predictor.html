@@ -40,14 +40,20 @@
                     let arr = predictionDiv.innerText.split("\n")
                     arr.forEach(song => {
                         if (value === song) {
-                            actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
+                            if (shift === 0) {
+                                actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
+                            } else {
+                                actualDiv.innerHTML += `<li style="background-color:#aaaa00">${value}</li>`;
+                                shift = 0;
+                            }
                         } else {
                             actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
+                            shift = 1;
                         }
                     });
                 }
             }
-            
+
             function uploaded(event) {
                 const file = event.target.files[0];
                 let reader = new FileReader();
@@ -64,6 +70,7 @@
             }
             const predictionDiv = document.getElementById("predictedSongs");
             const actualDiv = document.getElementById("actualSongs");
+            let shift = 0;
             actualDiv.innerHTML = ""
         </script>
     </body>
