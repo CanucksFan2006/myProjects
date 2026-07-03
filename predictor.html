@@ -41,10 +41,10 @@
                     if (value === arr[index]) {
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
                     } else {
-                        if (value !== arr[index - shift - 1]) {
-                            actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
-                            shift = shift + 1;
-                            console.log("A")
+                        if (value == arr[index - shift]) {
+                            actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
+                            index = index - shift
+                            shift = 0;
                         } else {
                             if (value === arr[index - shift - 1]) {
                                 actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
