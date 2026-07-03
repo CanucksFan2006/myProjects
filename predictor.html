@@ -26,6 +26,11 @@
                 reader.onload = function(e) {
                     predictions = e.target.result.split('\n').map(s => s.trim()).filter(s => s !== "");
                     predictionDiv.innerHTML = ""
+                    let listHTML = ""
+                    predictions.array.forEach(song => {
+                        listHTML += "<li>{song}</h1>"
+                    });
+                    predictionDiv.innerHTML = listHTML
                 }
                 reader.readAsText(file)
             }
