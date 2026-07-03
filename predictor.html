@@ -100,6 +100,7 @@
             }
 
             function score(items) {
+                scoreInt = 0;
                 items.forEach(item => {
                     if (item.style.backgroundColor == `rgb(0, ${0xaa}, 0)`) {
                         scoreInt = scoreInt + 1;
@@ -111,7 +112,7 @@
                 });
                 let n = items.length;
                 let s = (scoreInt/n)*100;
-                scoreDiv.innerText = `Score: ${s}%`
+                scoreDiv.innerText = `Score: ${s.toFixed(2)}%`
             }
             function uploaded(event) {
                 const file = event.target.files[0];
