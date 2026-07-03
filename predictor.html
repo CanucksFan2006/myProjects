@@ -46,14 +46,17 @@
                             index = index - shift
                             shift = 0;
                         } else {
-                            if (value !== arr[index + 1])
                             actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`
-                            shift = shift + 1
+                            if (value !== arr[index + 1]) {
+                                shift = shift + 1;
+                            } else {
+                                shift = 0;
+                            }
+                            
                         }
                     }
 
                     if (potentialSwap === 1) {
-                        console.log(index)
                         if (value === arr[index - 1]) {
                             let target1 = document.getElementById(`song${index - 1}`);
                             let target2 = document.getElementById(`song${index}`);
