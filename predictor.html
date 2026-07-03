@@ -54,10 +54,10 @@
                         index++;
                     } 
                     // 2. SWAP (Check if this is the next one, and next one is this one)
-                    else if (lastPlayed !== null && value === preds[currentIndex] && lastPlayed === preds[currentIndex + 1]) {
+                    else if (lastPlayed !== null && value === arr[index] && lastPlayed === arr[index + 1]) {
                         markBlue(value); 
                         markBlue(lastPlayed);
-                        currentIndex += 2; // Move index past both
+                        index += 2; // Move index past both
                         lastPlayed = null;     // Clear lastPlayed
                         return;
                     }
