@@ -47,8 +47,8 @@
                         } else {
                             tInner = t.innerText
                         }
-                        if (value === tInner) {
-                            t.innerText = t.innerText + "a";
+                        if (value === tInner.substring(0, value.length)) {
+                            t.innerText = t.innerText + `(x)`;
                         } else if (value === arr[index - shift]) {
                             actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${i}">${value}</li>`;
                             index = index - shift
@@ -103,6 +103,7 @@
             let i = 0
             let potentialSwap = 0;
             let tInner = ""
+            let repetitions = 2
             actualDiv.innerHTML = ""
         </script>
     </body>
