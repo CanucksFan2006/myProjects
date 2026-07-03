@@ -4,21 +4,28 @@
         <title>Concert Setlist Predictor</title>
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="smile.png" type="image/png">
+    <style>
+        label {
+            display: block;
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
     </head>
     <body>
-        <label for="upload">Upload Your Predictions</label>
-        <input type="file" id="upload" onchange="uploaded(e)" style="display:none" accept="text/plain">
+        <label for="upload">Click Here to Upload Your Predictions</label>
+        <input type="file" id="upload" onchange="uploaded(event)" style="display:none" accept="text/plain">
         <ol>
             <div id="predictedSongs"></div>
         </ol>
         <h1><a href="index.html">Back</a></h1>
         <script>
-            function uploaded(e) {
-                const file = e.target.files[0];
+            function uploaded(event) {
+                const file = event.target.files[0];
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     predictions = e.target.result.split('\n').map(s => s.trim());
-                    predictions.innerHTML = "A"
+                    predictionDiv.innerHTML = predictions
                 }
                 reader.readAsText(file)
             }
