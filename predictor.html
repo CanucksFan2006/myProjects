@@ -37,7 +37,7 @@
         <script>
             function press(event, value) {
                 if (event.key === "Enter") {
-                    let arr = predictionDiv.innerText.split("\n")
+                    let arr = predictionDiv.innerText.split("\n");
                     if (value === arr[index]) {
                         if (shift !== 1) {
                             actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
@@ -51,7 +51,10 @@
                     }
                     if (potentialSwap === 1) {
                         if (value === arr[index - 1]) {
-                            console.log("A");
+                            let target1 = document.getElementById(`song${index - 1}`);
+                            let target2 = document.getElementById(`song${index}`);
+                            target1.style.backgroundColor = "#00aaaa";
+                            target2.style.backgroundColor = "#00aaaa";
                             potentialSwap = 0;
                         }
                     }
