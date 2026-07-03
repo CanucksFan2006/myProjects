@@ -42,7 +42,12 @@
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${i}">${value}</li>`;
                     } else {
                         let t = document.getElementById(`song${i - 1}`)
-                        if (value === t.innerText && t) {
+                        if (!t) {
+                            tInner = ""
+                        } else {
+                            tInner = t.innerText
+                        }
+                        if (value === tInner) {
                             t.innerText = t.innerText + "a";
                         } else if (value === arr[index - shift]) {
                             actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${i}">${value}</li>`;
@@ -97,6 +102,7 @@
             let index = 0;
             let i = 0
             let potentialSwap = 0;
+            let tInner = ""
             actualDiv.innerHTML = ""
         </script>
     </body>
