@@ -42,7 +42,6 @@
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
                     } else {
                         actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
-                        shift = shift + 1;
                     }
                     if (potentialSwap === 1) {
                         if (value === arr[index - 1]) {
@@ -66,7 +65,6 @@
                         potentialSwap = 1;
                     }
                     if (value === arr[index - 1]) {
-                        potentialShift = 1;
                     }
                     index = index + 1;
                 }
