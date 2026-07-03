@@ -43,35 +43,40 @@
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(e, value) {
-                if (e.key !== "Enter" || value === "") return;
+            if (e.key !== "Enter" || value === "") return;
 
-                let arr = predictionDiv.innerText.split("\n").map(s => s.trim().replace(/^\d+\.\s*/, ''));
+            let arr = predictionDiv.innerText.split("\n").map(s => s.trim().replace(/^\d+\.\s*/, ''));
+            let li = document.createElement("li");
+            li.textContent = value;
+            let lastLi = actualDiv.lastElementChild;
+
+            // 1. SWAP DETECTION
+            // If the value I just typed (e.g., B) matches the one we skipped (arr[index-1])
+            // AND the last thing I typed (e.g., C) matches the one we are on (arr[index])
+            if (lastLi && value === arr[index-1] && lastLi.textContent === arr[index]) {
+                console.log("SWAP DETECTED");
                 
-                // DEBUG: This will tell us if your logic is even looking at the right items
-                console.log("Current Index:", index);
-                console.log("Expected Now:", arr[index], "| Expected Prev:", arr[index-1]);
-                console.log("Value Typed:", value, "| Last Played:", lastPlayed);
-
-                let li = document.createElement("li");
-                li.textContent = value;
-
-                // The Logic
-                if (lastPlayed === arr[index] && value === arr[index-1]) {
-                    // SWAP TRIGGER
-                    console.log("SWAP DETECTED");
-                    actualDiv.lastElementChild.style.backgroundColor = "#00aaaa";
-                    li.style.backgroundColor = "#00aaaa";
-                    index++; // Advance because we cleared 2 items
-                } else if (value === arr[index]) {
-                    li.style.backgroundColor = "#00aa00";
-                    index++;
-                } else {
-                    li.style.backgroundColor = "#aa0000";
-                }
-
+                // Fix the previous one (C) to blue
+                lastLi.style.backgroundColor = "#00aaaa";
+                // Make this one (B) blue
+                li.style.backgroundColor = "#00aaaa";
+                
                 actualDiv.appendChild(li);
-                lastPlayed = value;
+                return; // Done
             }
+
+            // 2. NORMAL MATCH
+            if (value === arr[index]) {
+                li.style.backgroundColor = "#00aa00"; // Green
+                index++;
+            } else {
+                li.style.backgroundColor = "#aa0000"; // Red
+                // DO NOT increment index on a miss
+            }
+
+            actualDiv.appendChild(li);
+            lastPlayed = value;
+        }
             function uploaded(event) {
                 const file = event.target.files[0];
                 let reader = new FileReader();
