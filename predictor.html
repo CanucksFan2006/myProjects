@@ -43,43 +43,49 @@
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(e, value) {
-                if (e.key === "Enter" && value !== "") {
-                    let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
-                    let li = document.createElement("li");
-                    li.textContent = value;
+                if (e.key !== "Enter" || value === "") return;
+                
+                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
+                let li = document.createElement("li");
+                li.textContent = value;
+                li.id = "song_" + (actualDiv.children.length); // Give it an ID to find later
 
-                    // 1. PERFECT MATCH
-                    if (value === arr[index]) {
-                        li.style.backgroundColor = "#00aa00"; // Green
-                        index++;
-                    } 
-                    // 2. SWAP (Check if this is the next one, and next one is this one)
-                    else if (lastPlayed !== null && value === arr[index] && lastPlayed === arr[index + 1]) {
-                        markBlue(value); 
-                        markBlue(lastPlayed);
-                        index += 2; // Move index past both
-                        lastPlayed = null;     // Clear lastPlayed
-                        return;
-                    }
-                    else if (value === lastPlayed) {
-                        repetitions[value] = (repetitions[value] || 1) + 1;
-                        li.textContent += ` (${repetitions[value]}x)`;
-                        li.style.backgroundColor = "#ffff00"; // Yellow
-                    }
-                    // 4. RECOVERY (If it's in the list, but not the current index)
-                    else if (arr.includes(value)) {
-                        li.style.backgroundColor = "#aa5000"; // Orange
-                        index = arr.indexOf(value) + 1;
-                    }
-                    // 5. WRONG
-                    else {
-                        li.style.backgroundColor = "#aa0000"; // Red
-                    }
-                    lastPlayed = value;
+                // 1. REPETITION (Edit previous)
+                if (lastPlayed === value) {
+                    let prevLi = actualDiv.lastElementChild;
+                    repetitions[value] = (repetitions[value] || 1) + 1;
+                    prevLi.textContent = `${value} (${repetitions[value]}x)`;
+                    prevLi.style.backgroundColor = "#ffff00";
+                    return; // Stop here, don't add a new li
+                }
 
+                // 2. SWAP CHECK
+                // If the last song was wrong, but THIS song is what the last one SHOULD have been
+                if (lastPlayed !== null && value === arr[index - 1] && lastPlayed === arr[index]) {
+                    let prevLi = actualDiv.lastElementChild;
+                    // Fix the previous one
+                    prevLi.style.backgroundColor = "#00aaaa";
+                    prevLi.textContent = value; // Update text if needed
+                    // Style current one
+                    li.style.backgroundColor = "#00aaaa";
                     actualDiv.appendChild(li);
                     lastPlayed = value;
+                    return;
                 }
+
+                // 3. NORMAL LOGIC
+                if (value === arr[index]) {
+                    li.style.backgroundColor = "#00aa00"; // Green
+                    index++;
+                } else if (arr.includes(value)) {
+                    li.style.backgroundColor = "#aa5000"; // Orange
+                    index = arr.indexOf(value) + 1;
+                } else {
+                    li.style.backgroundColor = "#aa0000"; // Red
+                }
+
+                actualDiv.appendChild(li);
+                lastPlayed = value;
             }
             function uploaded(event) {
                 const file = event.target.files[0];
