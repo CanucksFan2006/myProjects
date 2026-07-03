@@ -42,6 +42,9 @@
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${i}">${value}</li>`;
                     } else {
                         let t = document.getElementById(`song${i - 1}`)
+                        if (!t) {
+                            t.innerText = "";
+                        }
                         if (value === t.innerText||"") {
                             t.innerText = t.innerText + "a";
                         } else if (value === arr[index - shift]) {
