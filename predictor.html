@@ -100,7 +100,11 @@
             }
 
             function score(items) {
-                scoreDiv.innerText = items.length
+                items.forEach(item => {
+                    if (item.backgroundColor == "00aa00") {
+                        console.log("A")
+                    }
+                });
             }
             function uploaded(event) {
                 const file = event.target.files[0];
@@ -127,6 +131,7 @@
             let repetitions = [];
             let lastSongWasWrong = false;
             let lastPlayed = null;
+            let scoreInt = 0;
             actualDiv.innerHTML = ""
         </script>
     </body>
