@@ -73,6 +73,9 @@
                             let target2 = document.getElementById(`song${i}`);
                             target1.style.backgroundColor = "#00aaaa";
                             target2.style.backgroundColor = "#00aaaa";
+                        } else {
+                            let target1 = document.getElementById(`song${i - 1}`);
+                            target1.style.backgroundColor = "#00aa00";
                         }
                         potentialSwap = 0;
                         shift = 0;
