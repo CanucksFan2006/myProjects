@@ -45,7 +45,10 @@
                             actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
                         }
                         shift = 0;
-                    } else {
+                    } else if (value === arr[index + 1]) {
+                        actualDiv.innerHTML += `<li style="background-color:#00aaaa">${value}</li>`;
+                    }
+                    else {
                         actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
                         shift = shift + 1;
                     }
