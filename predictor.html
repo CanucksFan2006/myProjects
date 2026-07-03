@@ -48,8 +48,10 @@
                             tInner = t.innerText;
                         }
                         if (value === tInner.substring(0, value.length)) {
-                            t.innerText = t.innerText + ` (${repetitions}x)`;
+                            t.innerText = tInner.substring(0, value.length) + ` (${repetitions}x)`;
                             repetitions = repetitions + 1;
+                            i = i - 1;
+                            index = index - 1;
                         } else if (value === arr[index - shift]) {
                             actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${i}">${value}</li>`;
                             index = index - shift
