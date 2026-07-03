@@ -75,7 +75,10 @@
                             target2.style.backgroundColor = "#00aaaa";
                         } else {
                             let target1 = document.getElementById(`song${i - 1}`);
-                            target1.style.backgroundColor = "#00aa00";
+                            let target2 = document.getElementById(`song${i}`);
+                            target1.style.backgroundColor = "#aa5000";
+                            target2.style.backgroundColor = "#00aa00";
+                            index = index + 1
                         }
                         potentialSwap = 0;
                         shift = 0;
