@@ -18,9 +18,11 @@
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     predictions = e.target.result.split('\n').map(s => s.trim());
-                    
-                } 
+                }
+                reader.readAsText(file)
+                predictions.innerHTML = "A"
             }
+            const predictionDiv = document.getElementById("predictedSongs")
         </script>
     </body>
 </html>
