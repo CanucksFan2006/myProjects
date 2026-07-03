@@ -43,40 +43,55 @@
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(e, value) {
-            if (e.key !== "Enter" || value === "") return;
+                if (e.key !== "Enter" || value === "") return;
 
-            let arr = predictionDiv.innerText.split("\n").map(s => s.trim().replace(/^\d+\.\s*/, ''));
-            let li = document.createElement("li");
-            li.textContent = value;
-            let lastLi = actualDiv.lastElementChild;
-
-            // 1. SWAP DETECTION
-            // If the value I just typed (e.g., B) matches the one we skipped (arr[index-1])
-            // AND the last thing I typed (e.g., C) matches the one we are on (arr[index])
-            if (lastLi && value === arr[index-1] && lastLi.textContent === arr[index]) {
-                console.log("SWAP DETECTED");
-                
-                // Fix the previous one (C) to blue
-                lastLi.style.backgroundColor = "#00aaaa";
-                // Make this one (B) blue
-                li.style.backgroundColor = "#00aaaa";
-                
+                // 1. ADD: Just add the song to the list
+                let li = document.createElement("li");
+                li.textContent = value;
                 actualDiv.appendChild(li);
-                return; // Done
+                
+                // 2. CHECK: Color the whole list from scratch
+                checkColors();
             }
 
-            // 2. NORMAL MATCH
-            if (value === arr[index]) {
-                li.style.backgroundColor = "#00aa00"; // Green
-                index++;
-            } else {
-                li.style.backgroundColor = "#aa0000"; // Red
-                // DO NOT increment index on a miss
-            }
+            function checkColors() {
+                let arr = predictionDiv.innerText.split("\n").map(s => s.trim())
+                let items = Array.from(actualDiv.querySelectorAll("li"));
+                
+                // Reset colors first
+                items.forEach(li => li.style.backgroundColor = "");
 
-            actualDiv.appendChild(li);
-            lastPlayed = value;
-        }
+                // Track state for the loop
+                let predIdx = 0;
+
+                for (let i = 0; i < items.length; i++) {
+                    let val = items[i].textContent.replace(/\s*\(\d+x\)$/, ''); // Strip (Nx) for check
+
+                    // REPETITION CHECK
+                    if (i > 0 && val === items[i-1].textContent.replace(/\s*\(\d+x\)$/, '')) {
+                        items[i].style.backgroundColor = "#ffff00"; // Yellow
+                        continue;
+                    }
+
+                    // SWAP CHECK
+                    if (i > 0 && val === arr[predIdx - 1] && items[i-1].textContent === arr[predIdx]) {
+                        items[i-1].style.backgroundColor = "#00aaaa"; // Blue
+                        items[i].style.backgroundColor = "#00aaaa";   // Blue
+                        predIdx++; // Advance because we matched the swap
+                        continue;
+                    }
+
+                    // CORRECT/WRONG CHECK
+                    if (val === arr[predIdx]) {
+                        // Check if we just came from an error (Orange)
+                        let isOrange = (i > 0 && items[i-1].style.backgroundColor === "rgb(170, 0, 0)");
+                        items[i].style.backgroundColor = isOrange ? "#aa5000" : "#00aa00";
+                        predIdx++;
+                    } else {
+                        items[i].style.backgroundColor = "#aa0000"; // Red
+                    }
+                }
+            }
             function uploaded(event) {
                 const file = event.target.files[0];
                 let reader = new FileReader();
