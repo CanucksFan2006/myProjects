@@ -49,7 +49,15 @@
                         actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
                         shift = shift + 1;
                     }
-                    if (value === arr[index + 1])
+                    if (potentialSwap === 1) {
+                        if (value === arr[index - 1]) {
+                            console.log("A");
+                            potentialSwap = 0;
+                        }
+                    }
+                    if (value === arr[index + 1]) {
+                        potentialSwap = 1;
+                    }
                     index = index + 1;
                 }
             }
@@ -72,6 +80,7 @@
             const actualDiv = document.getElementById("actualSongs");
             let shift = 0;
             let index = 0;
+            let potentialSwap = 0;
             actualDiv.innerHTML = ""
         </script>
     </body>
