@@ -44,19 +44,27 @@
         <script>
             function press(e, value) {
                 if (e.key !== "Enter" || value === "") return;
+
                 let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
                 let items = Array.from(actualDiv.querySelectorAll("li"));
-                console.log(items)
-                // 1. ADD: Just add the song to the list
-                if (items[items.length - 1].substr(0, value.length) === value && items.length > 0) {
-                    console.log("A")
-                }
-                let li = document.createElement("li");
-                li.textContent = value;
-                actualDiv.appendChild(li);
                 
-                // 2. CHECK: Color the whole list from scratch
-                checkColors(arr, items);
+                // 1. REPEAT CHECK: See if the last item is already this song
+                if (items.length > 0 && items[items.length - 1].textContent.startsWith(value)) {
+                    let lastLi = items[items.length - 1];
+                    
+                    // Update the repetition counter
+                    repetitions[value] = (repetitions[value] || 1) + 1;
+                    lastLi.textContent = `${value} (${repetitions[value]}x)`;
+                } 
+                // 2. NEW SONG: Only add if not a repeat
+                else {
+                    let li = document.createElement("li");
+                    li.textContent = value;
+                    actualDiv.appendChild(li);
+                }
+                
+                // 3. RE-EVALUATE: Now color everything including the updated item
+                checkColors();
             }
 
             function checkColors(arr, items) {
