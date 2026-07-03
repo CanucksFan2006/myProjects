@@ -12,34 +12,50 @@
         }
 
         ol {
+            list-style-position: inside;
             font-size: 1.5em;
             font-weight: bold;
+            padding-left: 0;
+            margin: 0
         }
     </style>
     </head>
     <body>
         <label for="upload">Click Here to Upload Your Predictions</label>
         <input type="file" id="upload" onchange="uploaded(event)" style="display:none" accept="text/plain">
+        <h2>Predicted Setlist</h2>
+        <ol>
+            <div id="predictedSongs"></div>
+        </ol>
+        <h2>Actual Setlist</h2>
+        <input type="text" id="typed" onkeypress="press(event, this.value)">
         <ol>
             <div id="predictedSongs"></div>
         </ol>
         <h1><a href="index.html">Back</a></h1>
         <script>
+            function press(event, value) {
+                if (event.key === "Enter") {
+                    actualDiv.innerHTML += `<li>${value}</li>`;
+                }
+            }
             function uploaded(event) {
                 const file = event.target.files[0];
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     predictions = e.target.result.split('\n').map(s => s.trim()).filter(s => s !== "");
-                    predictionDiv.innerHTML = ""
-                    let listHTML = ""
+                    predictionDiv.innerHTML = "";
+                    let listHTML = "";
                     predictions.forEach(song => {
-                        listHTML += `<li>${song}</li>`
+                        listHTML += `<li>${song}</li>`;
                     });
-                    predictionDiv.innerHTML = listHTML
+                    predictionDiv.innerHTML = listHTML;
                 }
-                reader.readAsText(file)
+                reader.readAsText(file);
             }
-            const predictionDiv = document.getElementById("predictedSongs")
+            const predictionDiv = document.getElementById("predictedSongs");
+            const actualDiv = document.getElementById("predictedSongs");
+            actualDiv.innerHTML = ""
         </script>
     </body>
 </html>
