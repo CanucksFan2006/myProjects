@@ -95,10 +95,20 @@
                         predIdx++;
                         wasLastRed = false;
                     } 
-                    // INCORRECT
+                    // SKIPPED SONG CHECK (Forward only)
                     else {
-                        items[i].style.backgroundColor = "#aa0000";
-                        wasLastRed = true;
+                        let futureIndex = arr.indexOf(val, predIdx); // Search for song from current point forward
+                        
+                        if (futureIndex > predIdx) {
+                            // It exists later in the list: it's a skip
+                            items[i].style.backgroundColor = "#aa5000"; // Orange
+                            predIdx = futureIndex + 1; // Jump ahead
+                            wasLastRed = false;
+                        } else {
+                            // Not in the future list: it's truly wrong
+                            items[i].style.backgroundColor = "#aa0000"; // Red
+                            wasLastRed = true;
+                        }
                     }
                 }
             }
