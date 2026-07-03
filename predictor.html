@@ -31,12 +31,14 @@
         <ol>
             <div id="actualSongs"></div>
         </ol>
+        <br>
         <input type="text" id="typed" onkeypress="press(event, this.value)">
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(event, value) {
                 if (event.key === "Enter") {
                     actualDiv.innerHTML += `<li>${value}</li>`;
+                    predictionDiv.innerText.foreach(letter => (alert(letter)));
                 }
             }
             function uploaded(event) {
