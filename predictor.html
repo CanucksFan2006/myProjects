@@ -45,60 +45,60 @@
             function press(e, value) {
                 if (e.key !== "Enter" || value === "") return;
 
-                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
                 let items = Array.from(actualDiv.querySelectorAll("li"));
-                
-                // 1. REPEAT CHECK: See if the last item is already this song
-                if (items.length > 0 && items[items.length - 1].textContent.substr(0, value.length) === value) {
-                    let lastLi = items[items.length - 1];
-                    
-                    // Update the repetition counter
+                let lastLi = items.length > 0 ? items[items.length - 1] : null;
+
+                // 1. REPEAT CHECK (Clean comparison)
+                let lastClean = lastLi ? lastLi.textContent.replace(/\s*\(\d+x\)$/, '') : "";
+
+                if (lastLi && value === lastClean) {
                     repetitions[value] = (repetitions[value] || 1) + 1;
                     lastLi.textContent = `${value} (${repetitions[value]}x)`;
-                } 
-                // 2. NEW SONG: Only add if not a repeat
-                else {
+                } else {
+                    // 2. NEW SONG
                     let li = document.createElement("li");
                     li.textContent = value;
                     actualDiv.appendChild(li);
                 }
-                
-                // 3. RE-EVALUATE: Now color everything including the updated item
-                checkColors(arr, items);
+
+                // 3. RE-EVALUATE EVERYTHING
+                checkColors();
             }
 
-            function checkColors(arr, items) {
+            function checkColors() {
+                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
+                let items = Array.from(actualDiv.querySelectorAll("li"));
                 
-                // Reset colors
-                items.forEach(li => li.style.backgroundColor = "");
-
+                // We need to know if the PREVIOUS item was RED to trigger ORANGE
+                let wasLastRed = false;
                 let predIdx = 0;
 
                 for (let i = 0; i < items.length; i++) {
-                    let val = items[i].textContent;
+                    let val = items[i].textContent.replace(/\s*\(\d+x\)$/, '');
 
-                    // REPETITION (Check if this song is the same as previous)
-                    if (i > 0 && val === items[i-1].textContent.replace(/\s*\(\d+x\)$/, '')) {
-                        items[i].style.backgroundColor = "#ffff00"; // Yellow
-                        continue;
+                    // SWAP CHECK
+                    if (i < items.length - 1) {
+                        let nextVal = items[i+1].textContent.replace(/\s*\(\d+x\)$/, '');
+                        if (val === arr[predIdx + 1] && nextVal === arr[predIdx]) {
+                            items[i].style.backgroundColor = "#00aaaa";
+                            items[i+1].style.backgroundColor = "#00aaaa";
+                            predIdx += 2;
+                            i++; // Skip next loop
+                            wasLastRed = false;
+                            continue;
+                        }
                     }
 
-                    // SWAP (Look for pair mismatch)
-                    if (i > 0 && val === arr[predIdx - 1] && items[i-1].textContent === arr[predIdx]) {
-                        items[i-1].style.backgroundColor = "#00aaaa"; // Blue
-                        items[i].style.backgroundColor = "#00aaaa";   // Blue
-                        predIdx++; 
-                        continue;
-                    }
-
-                    // CORRECT/WRONG
+                    // CORRECT
                     if (val === arr[predIdx]) {
-                        // If previous item was Red (#aa0000), this one is Orange (#aa5000)
-                        let prevColor = i > 0 ? items[i-1].style.backgroundColor : "";
-                        items[i].style.backgroundColor = (prevColor === "rgb(170, 0, 0)") ? "#aa5000" : "#00aa00";
+                        items[i].style.backgroundColor = wasLastRed ? "#aa5000" : "#00aa00";
                         predIdx++;
-                    } else {
-                        items[i].style.backgroundColor = "#aa0000"; // Red
+                        wasLastRed = false;
+                    } 
+                    // INCORRECT
+                    else {
+                        items[i].style.backgroundColor = "#aa0000";
+                        wasLastRed = true;
                     }
                 }
             }
