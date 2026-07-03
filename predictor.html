@@ -39,7 +39,7 @@
                 if (event.key === "Enter") {
                     let arr = predictionDiv.innerText.split("\n")
                     if (value === arr[index]) {
-                        if (shift === 0) {
+                        if (shift !== 1) {
                             actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
                         } else {
                             actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
@@ -47,7 +47,7 @@
                         }
                     } else {
                         actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
-                        shift = 1;
+                        shift = shift + 1;
                     }
                     index = index + 1;
                     console.log(index)
