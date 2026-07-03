@@ -44,19 +44,22 @@
         <script>
             function press(e, value) {
                 if (e.key !== "Enter" || value === "") return;
-
+                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
+                let items = Array.from(actualDiv.querySelectorAll("li"));
+                console.log(items)
                 // 1. ADD: Just add the song to the list
+                if (items[items.length - 1].substr(0, value.length) === value && items.length > 0) {
+                    console.log("A")
+                }
                 let li = document.createElement("li");
                 li.textContent = value;
                 actualDiv.appendChild(li);
                 
                 // 2. CHECK: Color the whole list from scratch
-                checkColors();
+                checkColors(arr, items);
             }
 
-            function checkColors() {
-                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
-                let items = Array.from(actualDiv.querySelectorAll("li"));
+            function checkColors(arr, items) {
                 
                 // Reset colors
                 items.forEach(li => li.style.backgroundColor = "");
