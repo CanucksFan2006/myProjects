@@ -47,66 +47,51 @@
 
                 let items = Array.from(actualDiv.querySelectorAll("li"));
                 let lastLi = items.length > 0 ? items[items.length - 1] : null;
-
-                // 1. REPEAT CHECK (Clean comparison)
                 let lastClean = lastLi ? lastLi.textContent.replace(/\s*\(\d+x\)$/, '') : "";
-
                 if (lastLi && value === lastClean) {
                     repetitions[value] = (repetitions[value] || 1) + 1;
                     lastLi.textContent = `${value} (${repetitions[value]}x)`;
                 } else {
-                    // 2. NEW SONG
                     let li = document.createElement("li");
                     li.textContent = value;
                     actualDiv.appendChild(li);
                 }
-
-                // 3. RE-EVALUATE EVERYTHING
                 checkColors();
             }
 
             function checkColors() {
                 let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
                 let items = Array.from(actualDiv.querySelectorAll("li"));
-                
-                // We need to know if the PREVIOUS item was RED to trigger ORANGE
                 let wasLastRed = false;
                 let predIdx = 0;
 
                 for (let i = 0; i < items.length; i++) {
                     let val = items[i].textContent.replace(/\s*\(\d+x\)$/, '');
-
-                    // SWAP CHECK
                     if (i < items.length - 1) {
                         let nextVal = items[i+1].textContent.replace(/\s*\(\d+x\)$/, '');
                         if (val === arr[predIdx + 1] && nextVal === arr[predIdx]) {
                             items[i].style.backgroundColor = "#00aaaa";
                             items[i+1].style.backgroundColor = "#00aaaa";
                             predIdx += 2;
-                            i++; // Skip next loop
+                            i++;
                             wasLastRed = false;
                             continue;
                         }
                     }
-
-                    // CORRECT
                     if (val === arr[predIdx]) {
                         items[i].style.backgroundColor = wasLastRed ? "#aa5000" : "#00aa00";
                         predIdx++;
                         wasLastRed = false;
                     } 
-                    // SKIPPED SONG CHECK (Forward only)
                     else {
-                        let futureIndex = arr.indexOf(val, predIdx); // Search for song from current point forward
+                        let futureIndex = arr.indexOf(val, predIdx);
                         
                         if (futureIndex > predIdx) {
-                            // It exists later in the list: it's a skip
-                            items[i].style.backgroundColor = "#aa5000"; // Orange
-                            predIdx = futureIndex + 1; // Jump ahead
+                            items[i].style.backgroundColor = "#aa5000";
+                            predIdx = futureIndex + 1;
                             wasLastRed = false;
                         } else {
-                            // Not in the future list: it's truly wrong
-                            items[i].style.backgroundColor = "#aa0000"; // Red
+                            items[i].style.backgroundColor = "#aa0000";
                             wasLastRed = true;
                         }
                     }
