@@ -28,10 +28,10 @@
             <div id="predictedSongs"></div>
         </ol>
         <h2>Actual Setlist</h2>
-        <input type="text" id="typed" onkeypress="press(event, this.value)">
         <ol>
-            <div id="predictedSongs"></div>
+            <div id="actualSongs"></div>
         </ol>
+        <input type="text" id="typed" onkeypress="press(event, this.value)">
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(event, value) {
@@ -54,7 +54,7 @@
                 reader.readAsText(file);
             }
             const predictionDiv = document.getElementById("predictedSongs");
-            const actualDiv = document.getElementById("predictedSongs");
+            const actualDiv = document.getElementById("actualSongs");
             actualDiv.innerHTML = ""
         </script>
     </body>
