@@ -38,7 +38,7 @@
             function press(event, value) {
                 if (event.key === "Enter") {
                     let arr = predictionDiv.innerText.split("\n")
-                    if (value === song) {
+                    if (value === arr[index]) {
                         if (shift === 0) {
                             actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
                         } else {
