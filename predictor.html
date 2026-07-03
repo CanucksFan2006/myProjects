@@ -39,39 +39,43 @@
             <div id="actualSongs"></div>
         </ol>
         <br>
-        <input type="text"
-               id="typed"
-               onkeypress="press(event, this.value)">
+        <input type="text" id="typed" onkeypress="press(event, this.value)">
         <h1><a href="index.html">Back</a></h1>
         <script>
-            function press(event, value) {
-                if (event.key !== "Enter" || value === "") return;
-                let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
-                let target = arr[index];
-                if (value === target) {
-                    actualDiv.innerHTML += `<li style="background-color:#00aa00">${value}</li>`;
-                    index++;
-                    lastSongWasWrong = false;
-                }
-                else if (index + 1 < arr.length && value === arr[index + 1]) {
-                    actualDiv.innerHTML += `<li style="background-color:#00aaaa">${value}</li>`;
-                    index++;
-                }
-                else {
-                    if (!lastSongWasWrong) {
-                        actualDiv.innerHTML += `<li style="background-color:#aa0000">${value}</li>`;
-                        lastSongWasWrong = true;
-                    }
-                    else {
-                        actualDiv.innerHTML += `<li style="background-color:#aa5000">${value}</li>`;
-                        if (arr.includes(value)) {
-                            index = arr.indexOf(value) + 1;
-                            lastSongWasWrong = false;
-                        }
-                    }
-                }
-            }
+            function press(e, value) {
+                let li = document.createElement("li");
+                li.textContent = value;
 
+                // 1. PERFECT MATCH
+                if (value === preds[currentIndex]) {
+                    li.style.backgroundColor = "#00aa00"; // Green
+                    currentIndex++;
+                } 
+                // 2. SWAP (Check if this is the next one, and next one is this one)
+                else if (currentIndex + 1 < preds.length && value === preds[currentIndex+1] && 
+                        nextInput === preds[currentIndex]) { 
+                    // Note: This requires looking one step ahead
+                    li.style.backgroundColor = "#00aaaa"; // Blue
+                }
+                // 3. REPETITION (If song was just played)
+                else if (value === lastPlayed) {
+                    repetitions[value] = (repetitions[value] || 1) + 1;
+                    li.textContent += ` (${repetitions[value]}x)`;
+                    li.style.backgroundColor = "#ffff00"; // Yellow
+                }
+                // 4. RECOVERY (If it's in the list, but not the current index)
+                else if (preds.includes(value)) {
+                    li.style.backgroundColor = "#aa5000"; // Orange
+                    currentIndex = preds.indexOf(value) + 1;
+                }
+                // 5. WRONG
+                else {
+                    li.style.backgroundColor = "#aa0000"; // Red
+                }
+
+                actualDiv.appendChild(li);
+                lastPlayed = value;
+            }
             function uploaded(event) {
                 const file = event.target.files[0];
                 let reader = new FileReader();
