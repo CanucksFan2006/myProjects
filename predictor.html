@@ -36,13 +36,13 @@
         <h1><a href="index.html">Back</a></h1>
         <script>
             function press(event, value) {
-                if (event.key === "Enter") {
+                if (event.key === "Enter" && value !== "") {
                     let arr = predictionDiv.innerText.split("\n");
                     if (value === arr[index]) {
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${i}">${value}</li>`;
                     } else {
                         let t = document.getElementById(`song${i - 1}`)
-                        if (value === t.innerText) {
+                        if (value === t.innerText||"") {
                             t.innerText = t.innerText + "a";
                         } else if (value === arr[index - shift]) {
                             actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${i}">${value}</li>`;
