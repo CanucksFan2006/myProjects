@@ -24,8 +24,8 @@
                 const file = event.target.files[0];
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    predictions = e.target.result.split('\n').map(s => s.trim());
-                    predictionDiv.innerText = predictions
+                    predictions = e.target.result.split('\n').map(s => s.trim()).filter(s => s !== "");
+                    predictionDiv.innerHTML = ""
                 }
                 reader.readAsText(file)
             }
