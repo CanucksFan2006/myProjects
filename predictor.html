@@ -49,7 +49,7 @@
                 let items = Array.from(actualDiv.querySelectorAll("li"));
                 
                 // 1. REPEAT CHECK: See if the last item is already this song
-                if (items.length > 0 && items[items.length - 1] === value) {
+                if (items.length > 0 && items[items.length - 1].substr(0, value.length) === value) {
                     let lastLi = items[items.length - 1];
                     
                     // Update the repetition counter
