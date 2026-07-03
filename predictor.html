@@ -42,50 +42,48 @@
         <input type="text" id="typed" onkeypress="press(event, this.value)">
         <h1><a href="index.html">Back</a></h1>
         <script>
+            let lastWasIncorrect = false; // State tracker
+
             function press(e, value) {
                 if (e.key !== "Enter" || value === "") return;
                 
                 let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
-                let li = document.createElement("li");
-                li.textContent = value;
-                li.id = "song_" + (actualDiv.children.length); // Give it an ID to find later
+                let lastLi = actualDiv.lastElementChild;
 
-                // 1. REPETITION (Edit previous)
-                if (lastPlayed === value) {
-                    let prevLi = actualDiv.lastElementChild;
+                // 1. REPETITION (Edit previous li, keep its original color)
+                if (lastLi && lastLi.textContent.includes(value)) {
                     repetitions[value] = (repetitions[value] || 1) + 1;
-                    prevLi.textContent = `${value} (${repetitions[value]}x)`;
-                    prevLi.style.backgroundColor = "#ffff00";
-                    return; // Stop here, don't add a new li
+                    lastLi.textContent = `${value} (${repetitions[value]}x)`;
+                    return; // Exit, color stays as is
                 }
 
-                // 2. SWAP CHECK
-                // If the last song was wrong, but THIS song is what the last one SHOULD have been
-                if (lastPlayed !== null && value === arr[index - 1] && lastPlayed === arr[index]) {
-                    let prevLi = actualDiv.lastElementChild;
-                    // Fix the previous one
-                    prevLi.style.backgroundColor = "#00aaaa";
-                    prevLi.textContent = value; // Update text if needed
-                    // Style current one
-                    li.style.backgroundColor = "#00aaaa";
+                // 2. SWAP (If current matches previous expected, and previous matches current expected)
+                if (lastLi && value === arr[index - 1] && lastLi.textContent === arr[index]) {
+                    lastLi.style.backgroundColor = "#00aaaa"; // Blue
+                    let li = document.createElement("li");
+                    li.textContent = value;
+                    li.style.backgroundColor = "#00aaaa"; // Blue
                     actualDiv.appendChild(li);
-                    lastPlayed = value;
+                    lastWasIncorrect = false; // Swaps are "correct" transitions
                     return;
                 }
 
-                // 3. NORMAL LOGIC
+                // 3. CORRECT (Green or Orange)
+                let li = document.createElement("li");
+                li.textContent = value;
+
                 if (value === arr[index]) {
-                    li.style.backgroundColor = "#00aa00"; // Green
+                    li.style.backgroundColor = lastWasIncorrect ? "#aa5000" : "#00aa00";
                     index++;
-                } else if (arr.includes(value)) {
-                    li.style.backgroundColor = "#aa5000"; // Orange
-                    index = arr.indexOf(value) + 1;
-                } else {
-                    li.style.backgroundColor = "#aa0000"; // Red
+                    lastWasIncorrect = false;
+                } 
+                // 4. INCORRECT (Red)
+                else {
+                    li.style.backgroundColor = "#aa0000";
+                    lastWasIncorrect = true; // Trigger Orange for next time
                 }
 
                 actualDiv.appendChild(li);
-                lastPlayed = value;
             }
             function uploaded(event) {
                 const file = event.target.files[0];
