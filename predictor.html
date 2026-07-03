@@ -50,25 +50,29 @@
                 let arr = predictionDiv.innerText.split("\n").map(s => s.trim());
                 let lastLi = actualDiv.lastElementChild;
 
-                // 1. REPETITION (Edit previous li, keep its original color)
-                if (lastLi && lastLi.textContent.includes(value)) {
-                    repetitions[value] = (repetitions[value] || 1) + 1;
-                    lastLi.textContent = `${value} (${repetitions[value]}x)`;
-                    return; // Exit, color stays as is
-                }
-
-                // 2. SWAP (If current matches previous expected, and previous matches current expected)
-                if (lastLi && value === arr[index - 1] && lastLi.textContent === arr[index]) {
-                    lastLi.style.backgroundColor = "#00aaaa"; // Blue
+                // 1. SWAP CHECK: Current is arr[index-1] AND last was arr[index]
+                if (lastLi && value === arr[index - 1] && lastLi.textContent.includes(arr[index])) {
+                    // Turn the PREVIOUS one Blue
+                    lastLi.style.backgroundColor = "#00aaaa"; 
+                    
+                    // Add the CURRENT one as Blue
                     let li = document.createElement("li");
                     li.textContent = value;
-                    li.style.backgroundColor = "#00aaaa"; // Blue
+                    li.style.backgroundColor = "#00aaaa";
                     actualDiv.appendChild(li);
-                    lastWasIncorrect = false; // Swaps are "correct" transitions
+                    
+                    lastWasIncorrect = false; // Swaps are treated as a recovery/correct transition
                     return;
                 }
 
-                // 3. CORRECT (Green or Orange)
+                // 2. REPETITION
+                if (lastLi && lastLi.textContent.startsWith(value)) {
+                    repetitions[value] = (repetitions[value] || 1) + 1;
+                    lastLi.textContent = `${value} (${repetitions[value]}x)`;
+                    return;
+                }
+
+                // 3. NORMAL CORRECT/INCORRECT
                 let li = document.createElement("li");
                 li.textContent = value;
 
@@ -76,11 +80,9 @@
                     li.style.backgroundColor = lastWasIncorrect ? "#aa5000" : "#00aa00";
                     index++;
                     lastWasIncorrect = false;
-                } 
-                // 4. INCORRECT (Red)
-                else {
+                } else {
                     li.style.backgroundColor = "#aa0000";
-                    lastWasIncorrect = true; // Trigger Orange for next time
+                    lastWasIncorrect = true;
                 }
 
                 actualDiv.appendChild(li);
