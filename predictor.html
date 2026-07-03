@@ -13,7 +13,7 @@
 
         ol {
             font-size: 1.5em;
-            margin: 0
+            font-weight: bold;
         }
     </style>
     </head>
@@ -33,7 +33,7 @@
                     predictionDiv.innerHTML = ""
                     let listHTML = ""
                     predictions.forEach(song => {
-                        listHTML += `<li><h2>${song}</h2></li>`
+                        listHTML += `<li>${song}</li>`
                     });
                     predictionDiv.innerHTML = listHTML
                 }
