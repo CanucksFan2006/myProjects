@@ -41,7 +41,7 @@
                     if (value === arr[index]) {
                         actualDiv.innerHTML += `<li style="background-color:#00aa00" id="song${index}">${value}</li>`;
                     } else {
-                        if (shift !== 1) {
+                        if (shift !== 1 && value !== arr[index + 1]) {
                             actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
                             shift = 1;
                         } else {
