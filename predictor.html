@@ -45,12 +45,13 @@
                             actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
                             shift = shift + 1;
                         } else {
-                            if (value === arr[index - shift + 1]) {
+                            if (value === arr[index - shift - 1]) {
                                 actualDiv.innerHTML += `<li style="background-color:#aa5000" id="song${index}">${value}</li>`;
                                 index = index - shift
                                 shift = 0;
                             } else {
                                 actualDiv.innerHTML += `<li style="background-color:#aa0000" id="song${index}">${value}</li>`;
+                                console.log("A")
                             }
                         }
                     }
