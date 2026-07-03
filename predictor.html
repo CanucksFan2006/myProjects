@@ -101,9 +101,12 @@
 
             function score(items) {
                 items.forEach(item => {
-                    console.log(item.style.backgroundColor)
-                    if (item.backgroundColor == "00aa00") {
-                        console.log("A")
+                    if (item.style.backgroundColor == `rgb(0, ${0xaa}, 0)`) {
+                        scoreInt = scoreInt + 1
+                    } else if (item.style.backgroundColor == `rgb(${0xaa}, ${0x50}, 0)`) {
+                        scoreInt = scoreInt + 0.8
+                    } else if (item.style.backgroundColor == `rgb(0, ${0xaa}, ${0xaa})`) {
+                        scoreInt = scoreInt + 0.5
                     }
                 });
             }
