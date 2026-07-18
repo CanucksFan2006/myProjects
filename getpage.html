@@ -10,8 +10,8 @@
     <h1 id="a"></h1>
     <script>
       async function getPage(url) {
-        let x=fetch(url);
-        let y=await x.text();
+        let x=await fetch(url);
+        let y=await x.text;
         console.log(y) 
       }
       getPage("https://wikipedia.org");
