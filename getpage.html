@@ -11,8 +11,10 @@
     <script>
       async function getPage(url) {
         let x=await fetch(url);
-        let y=await x.text;
-        console.log(y) 
+        if (x.ok){
+          let y=await x.text();
+          console.log(y);
+        }
       }
       getPage("https://wikipedia.org");
     </script>
