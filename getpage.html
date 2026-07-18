@@ -10,10 +10,13 @@
     <h1 id="a"></h1>
     <script>
       async function getPage(url) {
-        let x=await fetch(url);
-        if (x.ok){
+        let x=await fetch(url, {mode: "no-cors"});
+        if (x.ok) {
           let y=await x.text();
           console.log(y);
+        }
+        else {
+          console.log(x.status)
         }
       }
       getPage("https://wikipedia.org");
