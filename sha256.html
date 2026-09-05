@@ -9,15 +9,19 @@
         <h1>Higher Or Lower</h1>
         <div id="number"></div>
         <input id="inputText">
-        <div id="highScoreText"></div>
+        <div id="output"></div>
         <h1><a href="index.html">Back</a></h1>
         <script>
             function start(k) {
                 if (k.key == "Enter") {
-                    window.alert("A");
+                    output.innerHTML = "";
+                    for (let i = 0; i < input.value.length; i++) {
+                        output.innerHTML += input.value.charCodeAt(i)+"<br>";
+                    }
                 }
             }
             let input = document.getElementById("inputText");
+            let output = document.getElementById("output");
             input.addEventListener("keydown", start);
         </script>
     </body>
