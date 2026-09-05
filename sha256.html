@@ -12,7 +12,13 @@
         <div id="highScoreText"></div>
         <h1><a href="index.html">Back</a></h1>
         <script>
+            function start(k) {
+                if (k.key == "Enter") {
+                    window.alert("A");
+                }
+            }
             let input = document.getElementById("inputText");
+            input.addEventListener("keydown", start);
         </script>
     </body>
 </html>
